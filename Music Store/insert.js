@@ -24,7 +24,7 @@ async function insertSomeDocuments() {
             name: "Andres",
             surname: "Rojas",
             email: "arojaspe@unal.edu.co",
-            password: "LYAs2hNP",
+            password: "AEIOU1234",
 
         },
         {
@@ -32,6 +32,51 @@ async function insertSomeDocuments() {
             surname: "Milosevich",
             email: "smilosevich@unal.edu.co",
             password: "UTFncj48",
+        },
+        {
+            name: "Felipe",
+            surname: "Sánchez",
+            email: "asanchezfu@unal.edu.co",
+            password: "ABCD1234",
+
+        },
+        {
+            name: "Juan Diego",
+            surname: "Ramirez",
+            email: "jramirezle@unal.edu.co",
+            password: "juanr123",
+        },
+        {
+            name: "Will",
+            surname: "Smith",
+            email: "wsmith@unal.edu.co",
+            password: "AAAAEEEEIII",
+
+        },
+        {
+            name: "Shakira",
+            surname: "Mebarak Ripoll",
+            email: "smebarak@unal.edu.co",
+            password: "UnaLobaEnElArmario",
+        },
+        {
+            name: "Leonel",
+            surname: "Messi",
+            email: "lmessi@unal.edu.co",
+            password: "meregalanbalonesdeoro",
+        },
+        {
+            name: "Gustavo",
+            surname: "Petro",
+            email: "petrosky@unal.edu.co",
+            password: "colombiahumana",
+
+        },
+        {
+            name: "Pepe",
+            surname: "Grillo",
+            email: "pgrillo@unal.edu.co",
+            password: "pinocho123",
         }
     ]);
 
@@ -39,7 +84,7 @@ async function insertSomeDocuments() {
 
     await songsCollection.insertMany([
         {
-            title: "EL Incomprendido",
+            title: "El Incomprendido",
             artist: "Rawayana - Neutro Shorty",
             genre: "Salsa",
 
@@ -58,10 +103,41 @@ async function insertSomeDocuments() {
             title: "2009",
             artist: "Mac Miller",
             genre: "Funk",
+        },
+        {
+            title: "Ivy",
+            artist: "Frank Ocean",
+            genre: "R&B"
+        },
+        {
+            title: "Seigfried",
+            artist: "Frank Ocean",
+            genre: "R&B",
+        },
+        {
+            title: "Distance",
+            artist: "Casper Sage",
+            genre: "R&B",
+        },
+        {
+            title: "La lluvia",
+            artist: "Nicolás y los fumadores",
+            genre: "Indie rock",
+        },
+        {
+            title: "Algo Contigo",
+            artist: "Los Panchos",
+            genre: "Bolero",
+        },
+        {
+            title: "Por mil noches",
+            artist: "AIRBAG",
+            genre: "Rock",
         }
     ]);
 
     console.log('Some documents were inserted into the "songs" collection');
+    await client.close();
 }
 
 insertSomeDocuments().catch(console.dir);

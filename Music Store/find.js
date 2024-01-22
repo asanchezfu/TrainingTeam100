@@ -28,7 +28,7 @@ async function findDocuments() {
     }
 
     const songQuery = (
-        { artist: "Mac Miller" } 
+        { artist: "Frank Ocean" } 
     );
 
     const song = await songsCollection.find(songQuery);
