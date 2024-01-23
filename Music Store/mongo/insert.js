@@ -11,6 +11,7 @@ async function insertSomeDocuments() {
     const database = client.db("Music_Store");
 
     await database.collection("users").insertMany([
+        req.body = 
         {
             name: "Yamile",
             surname: "Perdomo",
