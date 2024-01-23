@@ -1,7 +1,7 @@
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
 // Replace the uri string with your MongoDB deployment's connection string.
-const uri = "mongodb://localhost:27017";
+const uri = 'mongodb+srv://jramirezle:Milo.2020@cluster0.aecvodh.mongodb.net/?retryWrites=true&w=majority';
 
 // Create a new client and connect to MongoDB with the previous URI
 const client = new MongoClient(uri);
@@ -9,10 +9,8 @@ const client = new MongoClient(uri);
 async function insertSomeDocuments() {
 
     const database = client.db("Music_Store");
-    const usersCollection = database.collection("users");
-    const songsCollection = database.collection("songs");    
 
-    await usersCollection.insertMany([
+    await database.collection("users").insertMany([
         {
             name: "Yamile",
             surname: "Perdomo",
@@ -82,7 +80,7 @@ async function insertSomeDocuments() {
 
     console.log('Some documents were inserted into the "users" collection');
 
-    await songsCollection.insertMany([
+    await database.collection("songs").insertMany([
         {
             title: "El Incomprendido",
             artist: "Rawayana - Neutro Shorty",

@@ -9,38 +9,37 @@ const client = new MongoClient(uri);
 async function findDocuments() {
 
     const database = client.db("Music_Store");
-    const usersCollection = database.collection("users");
-    const songsCollection = database.collection("songs"); 
 
-    const userQuery = (
-        { email: "yaper@unal.edu.co" } 
+    const user = await database.collection("users").find(
+      { email: "yaper@unal.edu.co" }
     );
-
-    const user = await usersCollection.find(userQuery);
     
     // Print a message if no documents were found
-    if ((await usersCollection.countDocuments(userQuery)) === 0) {
+    if ((await database.collection("users").countDocuments(
+        { email: "yaper@unal.edu.co" }
+    )) === 0) {
         console.log("No documents matching!");
       }
     // Print returned documents
     for await (const doc of user) {
       console.dir(doc);
     }
-
-    const songQuery = (
-        { artist: "Frank Ocean" } 
+    
+    const song = await database.collection("songs").find(
+      { artist: "Frank Ocean" }
     );
-
-    const song = await songsCollection.find(songQuery);
     
     // Print a message if no documents were found
-    if ((await songsCollection.countDocuments(songQuery)) === 0) {
+    if ((await database.collection("songs").countDocuments(
+      { artist: "Frank Ocean" }
+    )) === 0) {
         console.log("No documents matching!");
       }
     // Print returned documents
     for await (const doc of song) {
       console.dir(doc);
     }
+    await client.close();
 }
 
 findDocuments().catch(console.dir);

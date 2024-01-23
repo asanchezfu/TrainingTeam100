@@ -8,21 +8,15 @@ const client = new MongoClient(uri);
 
 async function deleteDocument() {
     const database = client.db("Music_Store");
-    const usersCollection = database.collection("users");
-    const songsCollection = database.collection("songs"); 
 
-    const userQuery = (
-        { email: "yaper@unal.edu.co" } 
+    const user = await database.collection("users").deleteOne(
+        { email: "yaper@unal.edu.co" }
     );
 
-    const user = await usersCollection.deleteOne(userQuery);
-
-    const songQuery = (
-        { artist: "Mac Miller" } 
+    const song = await database.collection("songs").deleteOne(
+        { artist: "Mac Miller" }
     );
-
-    const song = await songsCollection.deleteOne(songQuery);
-    
+    await client.close();
 }
 
 deleteDocument().catch(console.dir);

@@ -8,10 +8,8 @@ const client = new MongoClient(uri);
 
 async function updateDocument() {
     const database = client.db("Music_Store");
-    const usersCollection = database.collection("users");
-    const songsCollection = database.collection("songs"); 
 
-    const songs = await songsCollection.updateOne(
+    const songs = await database.collection("songs").updateOne(
         { genre: 'R&B' },
         {
             $set: { 
@@ -21,7 +19,7 @@ async function updateDocument() {
         { upsert: true }
     );
 
-    const users = await usersCollection.updateOne(
+    const users = await database.collection("users").updateOne(
         { surname: 'Rojas' },
         {
             $set: { 
@@ -30,6 +28,7 @@ async function updateDocument() {
         },
         { upsert: true }
     );
+    await client.close();
 }
 
 updateDocument().catch(console.dir);
