@@ -1,21 +1,31 @@
-'use strict'
-const express = require('express');
-const router = express.Router(); //Para decirle a Express que aquí van las rutas
+const { MongoClient, ObjectId } = require('mongodb');
 
-
-router.get('/', async (req, res) => {
+let client;
+const connect = async () => {
   try {
-    const database = req.app.locals.db;
-    //Determinar 
-    const collection = database.collection('users');
+    //const uri = 'mongodb://localhost:27017';
+    const uri = 'mongodb+srv://jramirezle:Milo.2020@cluster0.aecvodh.mongodb.net/?retryWrites=true&w=majority';
+    client = new MongoClient(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      // ... otras opciones de configuración si es necesario
+    });
+
+    await client.connect();
+    console.log('Conexión exitosa a la base de datos');
+    _db = client.db("Music_Store"); // Reemplaza "tuNombreDeDB" con el nombre real de tu base de datos
     
-    const documentos = await collection.find().toArray();
-    
-    res.json({ documentos });
   } catch (error) {
-    console.error('Error en la ruta /:', error);
-    res.status(500).json({ error: 'Error en el servidor' });
+    console.error('Error de conexión a la base de datos:', error.message);
   }
-});
-  
-module.exports = router; //Para exportar las rutas
+};
+
+var _db;
+
+module.exports = {
+   connect,
+   getDb: function () {
+    return _db;
+  },
+  ObjectId: ObjectId, // Asegúrate de exportar ObjectId desde aquí
+};

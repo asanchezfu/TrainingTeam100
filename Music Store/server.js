@@ -1,38 +1,31 @@
-'use strict'
-const { MongoClient } = require('mongodb');
-const express = require('express');
+const { MongoClient, ObjectId } = require('mongodb');
 
-// const routes = require('./routes')
-// const user = require('./routes/user')
-// const http = require('http')
-// const path = require('path')
-
-const app = express();
-
-//Importar ruta 
-//const ruta = require('/routes/myFirstRoute');
-const ruta = require('./connection.js')
-
-//Conectar base de datos
-
-const uri = 'mongodb://localhost:27017/Music_Store';
-
-MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((client) => {
-    console.log('Conectado a la base de datos');
-    app.locals.db = client.db('Music_Store');
-
-    // Implementar ruta después de la conexión exitosa
-    app.use('/', ruta);
-
-    // Puerto
-    const port = 3000;
-
-    app.listen(port, () => {
-      console.log(`Express server listening on port ${port}`);
+let client;
+const connect = async () => {
+  try {
+    //const uri = 'mongodb://localhost:27017';
+    const uri = 'mongodb+srv://jramirezle:Milo.2020@cluster0.aecvodh.mongodb.net/?retryWrites=true&w=majority';
+    client = new MongoClient(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      // ... otras opciones de configuración si es necesario
     });
-  })
-  .catch((error) => {
-    console.error('Error al conectar a la base de datos:', error);
-  });
 
+    await client.connect();
+    console.log('Conexión exitosa a la base de datos');
+    _db = client.db("Music_Store"); // Reemplaza "tuNombreDeDB" con el nombre real de tu base de datos
+    
+  } catch (error) {
+    console.error('Error de conexión a la base de datos:', error.message);
+  }
+};
+
+var _db;
+
+module.exports = {
+   connect,
+   getDb: function () {
+    return _db;
+  },
+  ObjectId: ObjectId, // Asegúrate de exportar ObjectId desde aquí
+};
