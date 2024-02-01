@@ -3,8 +3,8 @@ const { MongoClient, ObjectId } = require('mongodb');
 let client;
 const connect = async () => {
   try {
-    //const uri = 'mongodb://localhost:27017';
-    const uri = 'mongodb+srv://jramirezle:Milo.2020@cluster0.aecvodh.mongodb.net/?retryWrites=true&w=majority';
+    const uri = 'mongodb://localhost:27017';
+    //const uri = 'mongodb+srv://jramirezle:Milo.2020@cluster0.aecvodh.mongodb.net/?retryWrites=true&w=majority';
     client = new MongoClient(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,

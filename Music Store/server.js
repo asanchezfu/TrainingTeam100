@@ -1,6 +1,6 @@
 // Importa el módulo de Express
 const express = require('express');
-const database = require('./connectionExpress');
+const database = require('./connection');
 
 // Crea una instancia de la aplicación Express
 const app = express();
