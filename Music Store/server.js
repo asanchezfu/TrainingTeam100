@@ -10,10 +10,14 @@ const app = express();
 app.use(express.json());
 
 //Importar Ruta
-const myFirst = require('./routes/myFirstRoute');
+const usersRoute = require('./routes/users');
+const songsRoute = require('./routes/songs');
+
 
 //Implementar ruta
-app.use('/', myFirst);
+app.use('/', usersRoute);
+app.use('/', songsRoute);
+
 
 // Connect to mongodb database
 database.connect();

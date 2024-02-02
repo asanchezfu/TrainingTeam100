@@ -13,7 +13,7 @@ const connect = async () => {
 
     await client.connect();
     console.log('Conexión exitosa a la base de datos');
-    _db = client.db("Music_Store"); // Reemplaza "tuNombreDeDB" con el nombre real de tu base de datos
+    _db = client.db("Music_Store");
     
   } catch (error) {
     console.error('Error de conexión a la base de datos:', error.message);

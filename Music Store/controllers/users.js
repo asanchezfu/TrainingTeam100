@@ -2,11 +2,22 @@
 
 const database = require('../connection');
 
-const find = async (req, res) => {
+const findUser = async (req, res) => {
     try {
         const db = await database.getDb();
         const users = await db.collection('users').find().toArray();//El toArray es para varios
         res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+const addUser = async (req, res) => {
+    try {
+        const db = await database.getDb();
+        const result = await db.collection('users').insertOne(req.body);
+        console.log('Se ha insertado un nuevo documento en la colección "users":');
+        res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -29,4 +40,4 @@ const findSomeUser = async (req, res) => {
 
 //const addUser 
 
-module.exports = { find, findSomeUser };
+module.exports = { findUser, findSomeUser, addUser };
